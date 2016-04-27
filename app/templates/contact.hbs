@@ -7,26 +7,27 @@
 
         {{#if responseMessage}}
 
-        <br />
-        <div class="alert alert-success">
-            <h4>Thank you! Your message is sent.</h4>
-            <p>To: {{email}}</p>
-            <p>Message: {{message}}</p>
-        </div>
+            <br />
+            <div class="alert alert-success">
+                <h4>Thank you! Your message is sent.</h4>
+                <p>To: {{model.email}}</p>
+                <p>Message: {{model.message}}</p>
+                <p>Message: {{model.id}}</p>
+            </div>
 
         {{else}}
 
-        <div class="form-group has-feedback {{if isValidEmail 'has-success'}}">
-            <label>Your email address*:</label>
-            {{input type="email" class="form-control" placeholder="Your email address" value=email autofocus="autofocus"}}
-            {{#if isValidEmail}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
-        </div>
-        <div class="form-group has-feedback {{if hasText 'has-success'}}">
-            <label>Your message*:</label>
-            {{textarea class="form-control" placeholder="Your message. (At least 5 characters.)" rows="5" value=message}}
-            {{#if hasText}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
-        </div>
-        <button class="btn btn-success" {{action 'sendMessage'}} disabled={{isNotValid}}>Send</button>
+            <div class="form-group has-feedback {{if model.isValidEmail 'has-success'}}">
+                <label>Your email address*:</label>
+                {{input type="email" class="form-control" placeholder="Your email address" value=model.email autofocus="autofocus"}}
+                {{#if model.isValidEmail}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
+            </div>
+            <div class="form-group has-feedback {{if model.hasText 'has-success'}}">
+                <label>Your message*:</label>
+                {{textarea class="form-control" placeholder="Your message. (At least 5 characters.)" rows="5" value=model.message}}
+                {{#if model.hasText}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
+            </div>
+            <button class="btn btn-success" {{action 'sendMessage' model}} disabled={{model.isNotValid}}>Send</button>
 
         {{/if}}
 

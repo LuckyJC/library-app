@@ -3,19 +3,18 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
     model() {
-        return this.store.createRecord('contact');
+        return this.store.createRecord('library');
     },
 
     actions: {
 
-        sendMessage(newContactMessage) {
-            newContactMessage.save().then(() => this.controller.set('responseMessage', true));
+        saveLibrary(newLibrary) {
+            newLibrary.save().then(() => this.transitionTo('libraries'));
         },
 
         willTransition() {
             // rollbackAttributes() removes the record from the store if the model 'isNew'
             this.controller.get('model').rollbackAttributes();
-            this.controller.set('responseMessage', false);
         }
 
     }
